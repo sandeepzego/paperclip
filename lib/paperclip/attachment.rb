@@ -100,7 +100,7 @@ module Paperclip
       # This line is what creates a file in /tmp
       @file = Paperclip.io_adapters.for(uploaded_file,
                                         @options[:adapter_options])
-      puts "\nFile opened"
+      # puts "\nFile opened"
       ensure_required_accessors!
       ensure_required_validations!
 
@@ -115,7 +115,7 @@ module Paperclip
           reset_file_if_original_reprocessed
           @file.close
           @file.unlink
-          puts "File closed\n"
+          # puts "File closed\n"
         end
       else
         nil
