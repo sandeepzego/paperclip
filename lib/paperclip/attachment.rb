@@ -113,9 +113,6 @@ module Paperclip
           assign_attributes
           post_process_file
           reset_file_if_original_reprocessed
-          @file.close
-          @file.unlink
-          # puts "File closed\n"
         end
       else
         nil
@@ -355,6 +352,9 @@ module Paperclip
         assign(self)
         save
         instance.save
+        @file.close
+        @file.unlink
+        # puts "File closed\n"
       rescue Errno::EACCES => e
         warn "#{e} - skipping file."
         false
