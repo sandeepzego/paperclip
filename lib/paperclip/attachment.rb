@@ -97,8 +97,10 @@ module Paperclip
     # attachment:
     #   new_user.avatar = old_user.avatar
     def assign(uploaded_file)
+      # This line is what creates a file in /tmp
       @file = Paperclip.io_adapters.for(uploaded_file,
                                         @options[:adapter_options])
+      puts "\nFile opened"
       ensure_required_accessors!
       ensure_required_validations!
 
@@ -111,6 +113,9 @@ module Paperclip
           assign_attributes
           post_process_file
           reset_file_if_original_reprocessed
+          @file.close
+          @file.unlink
+          puts "File closed\n"
         end
       else
         nil
